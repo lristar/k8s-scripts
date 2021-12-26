@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web2
+  namespace: publish-service
+  labels:
+    app: web2
+spec:                           #Deployment的规格说明
+  selector:
+    matchLabels:
+      app: web2
+  replicas: 1                   #指定副本数为3
+  template:                     #定义Pod的模板
+    metadata:                   #定义Pod的元数据
+      labels:                   #定义label（标签）
+        app: web2               #label的key和value分别为app和nginx
+    spec:
+      containers:
+        - name: web2
+          image: 192.168.195.131:5000/service:web1.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8888
+      imagePullSecrets:
+        - name: docker-reader-secret

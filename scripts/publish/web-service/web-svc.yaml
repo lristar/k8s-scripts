@@ -1,0 +1,15 @@
+apiVersion: v1        ##版本号
+kind: Service        ##服务类型
+metadata:
+  name: web2
+  namespace: publish-service
+  labels:
+    app: web2
+spec:
+  type: NodePort     ##端口映射
+  ports:
+    - port: 8888 		##内部端口
+      targetPort: 8888   ##映射端口
+      nodePort: 30889   ## 对外暴露的端口
+  selector:       ##选择器/
+    app: web2		##选择业务进行发布
