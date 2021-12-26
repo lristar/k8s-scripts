@@ -1,0 +1,4 @@
+##先登录私有仓库
+docker login 192.168.195.131:5000
+## 获取这个密钥 写到yaml文件内
+cat ~/.docker/config.json | base64

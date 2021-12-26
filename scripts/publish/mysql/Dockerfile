@@ -7,3 +7,5 @@ ENV TZ=Asia/Shanghai
 RUN sed -i 's/bind-address/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 VOLUME ["/data/mysql:/var/lib/mysql"]
 EXPOSE 3306
+
+
