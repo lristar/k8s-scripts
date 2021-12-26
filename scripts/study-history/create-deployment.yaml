@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: publish-service
+  labels:
+    app: mysql
+spec:                           #Deployment的规格说明
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1                   #指定副本数为3
+  template:                     #定义Pod的模板
+    metadata:                   #定义Pod的元数据
+      labels:                   #定义label（标签）
+        app: mysql               #label的key和value分别为app和nginx
+    spec:
+      containers:
+        - name: mysql
+          image: 192.168.195.131:5000/publish:mysql5.7
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
+      imagePullSecrets:
+        - name: docker-reader-secret  ##用私有仓库的时候需要用到的密钥 ，方法在priv-docker
